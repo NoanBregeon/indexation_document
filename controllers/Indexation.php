@@ -7,28 +7,29 @@ class Indexation {
     }
 
     public function indexerTexte($idDocument, $texte) {
-        $mots = str_word_count(strtolower($texte), 1);
-        $mots = array_filter($mots, function($mot) {
-            return ctype_alpha($mot);
-        });
-
+        $texte = mb_strtolower($texte, 'UTF-8');
+        $texte = preg_replace('/[^\\p{L}\\s]/u', ' ', $texte);
+        $mots = preg_split('/\\s+/', $texte, -1, PREG_SPLIT_NO_EMPTY);
+    
         $motLiaison = new MotLiaison($this->conn);
         $motsExclus = $motLiaison->getMotsExclus();
-
+    
         $frequence = [];
         foreach ($mots as $mot) {
-            if (!in_array($mot, $motsExclus)) {
-                if (!isset($frequence[$mot])) {
-                    $frequence[$mot] = 0;
-                }
-                $frequence[$mot]++;
+            $type = in_array($mot, $motsExclus) ? 'mot_liaison' : 'mot_cle';
+            if (!isset($frequence[$mot])) {
+                $frequence[$mot] = ['count' => 0, 'type' => $type];
             }
+            $frequence[$mot]['count']++;
         }
-
-        foreach ($frequence as $mot => $count) {
-            $stmt = $this->conn->prepare('INSERT INTO Indexation (Mot_Cle, Id_Documents, Nombre_Mot) VALUES (?, ?, ?)');
-            $stmt->bind_param('sii', $mot, $idDocument, $count);
+    
+        foreach ($frequence as $mot => $data) {
+            $stmt = $this->conn->prepare('INSERT INTO Indexation (Mot_Cle, Id_Documents, Nombre_Mot, Type) VALUES (?, ?, ?, ?)');
+            $stmt->bind_param('siis', $mot, $idDocument, $data['count'], $data['type']);
             $stmt->execute();
         }
     }
+    
+    
 }
+?>
