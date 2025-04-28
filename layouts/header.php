@@ -9,5 +9,6 @@
         <a href="<?= BASE_URL ?>index.php">Accueil</a>
         <a href="<?= BASE_URL ?>views/mots_liaison.php">Mots de liaison</a>
         <a href="<?= BASE_URL ?>views/textes.php">Textes</a>
+        <a href="<?= BASE_URL ?>views/dashboard.php">Dashboard</a>
     </nav>
 </header>
