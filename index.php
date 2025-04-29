@@ -33,14 +33,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['fichier'])) {
 </head>
 <body>
     <?php include 'layouts/header.php'; ?>
+<div class="container">
     <h1>EasyIndex - Ajouter un document</h1>
+    
     <form method="post" enctype="multipart/form-data">
-        <label>Choisir un fichier texte (.txt) :
-            <input type="file" name="fichier" accept=".txt" required>
-        </label><br><br>
-        <input type="submit" value="Envoyer">
+        <div class="form-group">
+            <label>Choisir un fichier texte (.txt) :</label>
+            
+            <div class="file-upload">
+                <input type="file" id="fichier" name="fichier" accept=".txt" onchange="updateFileName(this)">
+                <label for="fichier" class="file-upload-label">Choisir un fichier</label>
+                <span class="file-name">Aucun fichier choisi</span>
+            </div>
+        </div>
+        
+        <div class="upload-btn-container">
+            <button type="submit" class="upload-btn">Envoyer</button>
+        </div>
     </form>
+</div>
+
+<script>
+function updateFileName(input) {
+    const fileName = input.files[0] ? input.files[0].name : 'Aucun fichier choisi';
+    document.querySelector('.file-name').textContent = fileName;
+}
+</script>
     <?php include 'layouts/footer.php'; ?>
 </body>
 </html>
-    

@@ -84,7 +84,7 @@ $result = $conn->query($query);
     <style>
         .success { color: green; }
         .error { color: red; }
-        .actions { display: flex; gap: 10px; }
+        .actions { display: flex; gap: 10px;margin-top : 15%;}
         .btn-edit { background-color: #3498db; }
         .btn-delete { background-color: #e74c3c; }
         .btn { 
@@ -158,7 +158,7 @@ $result = $conn->query($query);
                                         <?= nl2br(htmlspecialchars($row['Texte'])) ?>
                                     </div>
                                 </td>
-                                <td class="actions">
+                                <td class="actions" id="button">
                                     <a href="textes.php?edit=<?= $row['Id_Documents'] ?>" class="btn btn-edit">Modifier</a>
                                     <form method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce document?');">
                                         <input type="hidden" name="delete_id" value="<?= $row['Id_Documents'] ?>">
