@@ -1,29 +1,35 @@
 /* Style global */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    background-color: #f5f7fa;
     color: #333;
     line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Logo */
-header .logo img {
-    height: 50px;
-    width: auto;
-    display: block;
-}
-
-/* Alignement du header */
+/* Header et navigation */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 15px 30px;
     background-color: #22597d;
     color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header .logo img {
+    height: 50px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+header .logo img:hover {
+    transform: scale(1.05);
 }
 
 header nav {
@@ -35,114 +41,354 @@ header nav a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    padding: 8px 15px;
+    padding: 10px 15px;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 header nav a:hover {
-    background-color: #22597d;
+    background-color: #1b4d6b;
+    transform: translateY(-2px);
+}
+
+header nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 15px;
+    right: 15px;
+    height: 2px;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+header nav a:hover::after {
+    background-color: #fff;
+}
+
+/* Contenu principal */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    margin: 0 auto;
 }
 
 /* Pied de page */
 footer {
-    background-color: #f1f1f1;
-    color: #777;
+    background-color: #22597d;
+    color: rgba(255, 255, 255, 0.8);
     text-align: center;
-    padding: 10px 0;
-    margin-top: 20px;
-    border-top: 1px solid #ddd;
+    padding: 20px 0;
+    margin-top: auto;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Titres */
-h1 {
+h1, h2, h3 {
     color: #22597d;
+    font-weight: 600;
+}
+
+h1 {
     text-align: center;
-    margin: 20px 0;
+    margin: 30px 0;
+    font-size: 2rem;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #22597d;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin: 25px 0 15px;
 }
 
 /* Tableaux */
 table {
-    width: 90%;
-    margin: 20px auto;
-    border-collapse: collapse;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 0 auto;
 }
 
 table th, table td {
-    border: 1px solid #ddd;
-    padding: 10px;
+    border: 1px solid #e6e6e6;
+    padding: 12px 15px;
     text-align: left;
 }
 
 table th {
     background-color: #22597d;
     color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
 }
 
 table tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #f9f9f9;
 }
 
 table tr:hover {
-    background-color: #eaf2f8;
+    background-color: #f0f7fc;
+}
+
+/* Trier les colonnes */
+.sort-link {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sort-icon {
+    margin-left: 5px;
+    font-size: 0.8rem;
+}
+
+.sort-active {
+    font-weight: bold;
 }
 
 /* Formulaires */
 form {
     margin: 20px auto;
-    max-width: 500px;
-    padding: 20px;
+    max-width: 600px;
+    padding: 25px;
     background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 form label {
     display: block;
     margin-bottom: 10px;
-    font-weight: bold;
+    font-weight: 600;
+    color: #22597d;
 }
 
-input[type="file"], input[type="submit"] {
-    padding: 10px;
-    margin-top: 10px;
-    width: 95%;
+input[type="text"], 
+input[type="file"], 
+input[type="submit"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 1rem;
 }
 
-input[type="submit"] {
+input[type="file"] {
+    padding: 10px;
+    background-color: #f5f7fa;
+    cursor: pointer;
+}
+
+input[type="submit"], .btn {
     background-color: #22597d;
     color: white;
     cursor: pointer;
     font-weight: bold;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, .btn:hover {
+    background-color: #1b4d6b;
+    transform: translateY(-2px);
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Boutons */
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.btn-edit {
+    background-color: #3498db;
+}
+
+.btn-edit:hover {
     background-color: #2980b9;
 }
 
-/* Liens */
-a {
-    color: #3498db;
-    text-decoration: none;
+.btn-delete {
+    background-color: #e74c3c;
 }
 
-a:hover {
-    text-decoration: underline;
+.btn-delete:hover {
+    background-color: #c0392b;
 }
 
-/* Conteneur principal */
+/* Messages */
+.success, .error {
+    padding: 12px 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+    font-weight: 500;
+    text-align: center;
+}
+
+.success {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+/* Container pour améliorer la mise en page générale */
 .container {
     width: 90%;
-    margin: 0 auto;
-    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 25px;
     background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Supprimez les conflits entre les styles de formulaire et de conteneur */
+form.container {
+    max-width: 600px;
+}
+
+/* Pour que les tableaux soient toujours centrés */
+table {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Pour les conteneurs qui contiennent des tableaux */
+.container table {
+    box-shadow: none;
+}
+
+/* Boutons d'action dans les tableaux */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Style spécifique pour les boutons dans les tableaux */
+td .btn {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    min-width: 90px;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+/* Empêcher le débordement du texte des boutons */
+td .btn {
+    white-space: nowrap;
+}
+
+/* Effets de survol améliorés */
+td .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Effet au clic */
+td .btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Bouton Modifier */
+td .btn-edit {
+    background-color: #3498db;
+    color: white;
+}
+
+td .btn-edit:hover {
+    background-color: #2980b9;
+}
+
+/* Bouton Supprimer */
+td .btn-delete {
+    background-color: #e74c3c;
+    color: white;
+}
+
+td .btn-delete:hover {
+    background-color: #c0392b;
+}
+
+/* Formulaires dans les tableaux */
+td form {
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    background: transparent;
+    max-width: none;
+    transition: none;
+}
+
+td form:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Icônes pour les boutons (optionnel, vous pouvez les ajouter plus tard) */
+td .btn-edit:before {
+    content: "✎ ";
+}
+
+td .btn-delete:before {
+    content: "✖ ";
 }
